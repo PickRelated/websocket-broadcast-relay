@@ -1,4 +1,4 @@
-FROM node20
+FROM node:20-alpine
 WORKDIR /websocket-broadcast-relay
 COPY package.json yarn.lock .
 RUN yarn install --prod
