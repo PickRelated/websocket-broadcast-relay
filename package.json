@@ -8,6 +8,8 @@
     "prod": "node index.js"
   },
   "dependencies": {
+    "express": "^5.1.0",
+    "moment": "^2.30.1",
     "prettier": "^3.6.2",
     "socket.io": "^4.8.1"
   }

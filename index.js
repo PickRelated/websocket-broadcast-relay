@@ -1,16 +1,16 @@
-const { Server } = require('socket.io')
-
 const PORT = 3333
 
-const io = new Server(PORT)
+const http = require('http')
+const express = require('express')
 
-io.on('connection', (socket) => {
-  console.info(`Connection from client ${socket.id}`)
+const routes = require('./routes')
+const socket = require('./socket')
 
-  socket.onAny((event, data) => {
-    console.info(`${socket.id} sent event ${event} with payload ${JSON.stringify(data)}`)
-    socket.broadcast.emit(event, data)
-  })
+const app = express()
+const httpServer = http.createServer(app)
+
+httpServer.listen(PORT, async () => {
+  await socket.attach(httpServer)
+  routes.init(app)
+  console.info(`Server is listening on port ${PORT}`)
 })
-
-console.info(`Server is listening on port ${PORT}`)
