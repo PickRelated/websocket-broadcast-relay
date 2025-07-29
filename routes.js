@@ -2,7 +2,8 @@ const { socketHistory } = require('./socket')
 
 const init = (app) => {
   app.get('/history', (req, res) => {
-    res.send(socketHistory.events)
+    const { id } = req.query
+    res.send(socketHistory[id] || [])
   })
 }
 
